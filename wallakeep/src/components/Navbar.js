@@ -4,18 +4,36 @@ import PropTypes from 'prop-types';
 
 function FormSearch ({ onChangeText, remaningQueries, text }) {
   return (
-		<div className="navbar-start width100">
-			<div className="navbar-item width100 is-expanded">
-				<div className="field search width100">
-					<div className="control">
-           <input className="input is-primary" value={text} onChange={onChangeText} id="search" type="search" placeholder="Search a Movie.." />
-         	</div>
-       	</div>
-     	</div>
-     	<div className="navbar-item is-expanded">
-     		<label className="label">{remaningQueries}</label>
-			</div>
-    </div>
+    <form id="form-search" action=".">
+      <div className="navbar-start width100">
+        <div className="navbar-item width100 is-expanded">
+          <div className="field search width100">
+            <div className="control">
+            <input className="input is-primary" value={text} onChange={onChangeText} id="search" type="search" placeholder="Search an Advert.." />
+            </div>
+          </div>
+        </div>
+        <div className="navbar-item width100 is-expanded">
+          <div className="field search width100">
+            <div className="control">
+            <input className="input is-primary" value={text} onChange={onChangeText} id="search" type="number" placeholder="Price" />
+            </div>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control">
+              <button type="submit" class="button is-primary">
+                <span class="icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span>Search</span>
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </form>
  )
 }
 
@@ -47,7 +65,7 @@ export default class Navbar extends React.Component {
       <nav className="navbar">
           <div className="navbar-brand">
             <a className="navbar-item " href="/">
-              <span role="img" aria-label="Movies" className="bd-emoji">🍿</span> &nbsp;<span className="title-logo">Movies</span>
+              <span role="img" aria-label="Movies" className="bd-emoji">🛒</span> &nbsp;<span className="title-logo">WallaKeep</span>
             </a>
             <div className={`navbar-burger burger ${activeBurguer === true ? 'is-active' : null}`} onClick={this.toggleBurguer} data-target="navMenubd-example">
               <span></span>
@@ -57,9 +75,11 @@ export default class Navbar extends React.Component {
           </div>
           <div id="navMenubd-example" className={`navbar-menu ${activeBurguer === true ? 'is-active' : null}`}>
             <div className="navbar-start">
-              {/* <Link className="navbar-item " to='/'><span role="img" aria-label="Home" className="bd-emoji">🏠</span> &nbsp;Home</Link> */}
               <a className="navbar-item " to='/'><span role="img" aria-label="Home" className="bd-emoji">🏠</span> &nbsp;Home</a>
             </div>
+            
+              <FormSearch text={this.props.text} onChangeText={this.props.onChangeText} remaningQueries={this.props.remaningQueries} imageBaseURL={this.props.imageBaseURL} text={this.props.text}/>
+             
             
           </div>
         </nav>
