@@ -1,6 +1,10 @@
 // import Navbar from './Navbar';
 import React from 'react';
 import Navbar from './Navbar';
+import Loading from './Loading';
+import api from '../utils/api';
+
+const { getAdverts } = api();
 
 
 function NoResults ({ message, error }) {
@@ -86,10 +90,35 @@ export default class Adverts extends React.Component {
     
     // this.discoverFilms(this.context.user);
   }
+
+  componentDidMount() {
+    this.fetchAdverts()
+  }
+
+  fetchAdverts() {
+    getAdverts()
+      .then(res => this.setState({
+        loading: false,
+        adverts: res.results
+      }))
+      .catch(err => console.error('Error in fetching Adverts: ', err));
+  }
+
+
+
+
   
   render () {
+    const { loading , adverts } = this.state;
+
     return (
-      <Navbar onChangeText={this.changeText} />
+      <React.Fragment>
+        <Navbar onChangeText={this.changeText} />
+        {loading === true 
+          ?  <Loading text='Fetching Adverts' />
+          :  <AdvertsGrid adverts={adverts} text={this.state.text}/>
+        }
+      </React.Fragment>
     )
   } 
 }

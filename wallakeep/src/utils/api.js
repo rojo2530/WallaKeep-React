@@ -9,11 +9,17 @@ const api = () => {
       const endPoint = `${API_URL}/anuncios?limit=${LIMIT}`;
       return axios.get(endPoint)
 				.then(response => response.data)
+				.catch(err => {
+					throw err;
+				});
 		},
 		getTags: () => {
 			const endPoint = `${API_URL}/tags`;
 			return axios.get(endPoint)
-				.then(response => response.data.results);
+				.then(response => response.data.results)
+				.catch(err => {
+					throw err;
+				});
 		}
 	
 		// getFilms: (query, year, page = 1) => {

@@ -20,12 +20,12 @@ function FormSearch ({ onChangeText, remaningQueries, text }) {
             </div>
           </div>
         </div>
-        <div class="navbar-item">
-          <div class="field is-grouped">
-            <p class="control">
-              <button type="submit" class="button is-primary">
-                <span class="icon">
-                  <i class="fa fa-search"></i>
+        <div className="navbar-item">
+          <div className="field is-grouped">
+            <p className="control">
+              <button type="submit" className="button is-primary">
+                <span className="icon">
+                  <i className="fa fa-search"></i>
                 </span>
                 <span>Search</span>
               </button>
