@@ -8,29 +8,29 @@ export default class SelectTag extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tags: 'Select tag',
+      tags: '',
       loading: true,
     }
   }
 
   componentDidMount() {
     getTags().then(tags => this.setState({
-      tags: [this.state.tags, ...tags],
+      tags: ['all', ...tags],
       loading: false
     })).catch(err => console.error(err));
   }
 
   render () {
     const { tags, loading } = this.state;
+    if (loading) {
+      return null;
+    }
     const { tag , onChange } = this.props;
-    if (loading) return null;
     return (
-      <div className="select is-primary" style={{ width: '100%'}}>
-        <select name='tag' style={{ width: '100%'}} value={tag} defaultValue='Select tag' onChange={onChange}  >
+      <div className="select is-primary"  style={{ width: '100%'}} >
+        {console.log('Select tag: ', this.props)}
+        <select name='tag' style={{ width: '100%'}} value={tag} onChange={onChange}  >
           {tags.map(tagName => {
-            if (tagName === 'Select tag') {
-              return <option disabled key={tagName} value={tagName}>{tagName}</option>
-            }
             return  <option key={tagName} value={tagName}>{tagName}</option>
           })}
         </select>

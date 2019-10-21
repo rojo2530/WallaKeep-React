@@ -1,5 +1,6 @@
 // import Navbar from './Navbar';
 import React from 'react';
+import UserContext from '../contexts/user';
 import Navbar from './Navbar';
 import Loading from './Loading';
 import Searchbar from './Searchbar';
@@ -60,7 +61,7 @@ export default class Adverts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      loading: false,
       adverts: [],
       filter: {
         name: '',
@@ -99,23 +100,26 @@ export default class Adverts extends React.Component {
   }
 
   changeText({ target }) {
-    // const { getFilms } = api(this.context.user.apikey);
-      // console.log(target.name);
-      
-      
-      this.setState({
-        filter: {
-          ...this.state.filter,
-          [target.name]: target.value,
-        }
-  });
-    
- 
+    this.setState({
+      filter: {
+        ...this.state.filter,
+        [target.name]: target.value,
+      }
+    });
   }
 
   componentDidMount() {
-    this.fetchAdverts();
-    
+    const { user } = this.context;
+    if (Object.entries(user).length === 0) {
+      return this.props.history.push('/register');
+    }
+    this.setState({
+      filter: {
+        ...this.state.filter,
+        tag: this.context.user.tag,
+      }
+      }, () => this.fetchAdverts(this.state.filter)
+    );
   }
 
   fetchAdverts() {
@@ -129,6 +133,11 @@ export default class Adverts extends React.Component {
 
   render () {
     const { loading , adverts, filter } = this.state;
+    const { user } = this.context;
+
+    if (Object.entries(user).length === 0) {
+      return null;
+    }
 
     return (
       <React.Fragment>
@@ -144,3 +153,5 @@ export default class Adverts extends React.Component {
     )
   } 
 }
+
+Adverts.contextType = UserContext;

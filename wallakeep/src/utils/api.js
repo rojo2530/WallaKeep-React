@@ -12,8 +12,8 @@ function buildEndPoint(filter) {
 		endPoint = `${endPointBase}&name=${name}`;
 	} 
 
-	if (tag) {
-		endPoint = `${endPoint}&tag=${tag}`;
+	if (tag && tag !== 'all') {
+			endPoint = `${endPoint}&tag=${tag}`;
 	}
 
 	if (type && type === 'buy') {

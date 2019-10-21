@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 import SelectTag from './SelectTag';
 
 
-function FormSearch ({ onChangeText, handlerSubmit, onChangePrice, name, priceMin, priceMax, tag, type }) {
+function FormSearch ({ onChangeText, handlerSubmit, name, priceMin, priceMax, tag, type }) {
   return (
+    
     <form id="form-search" action="." onSubmit={handlerSubmit}>
+      {console.log('Filtros: ', name, tag, priceMin, priceMax)}
       <div className="navbar-start width100">
         <div className="navbar-item width100 is-expanded">
           <div className="field search width100">
@@ -18,7 +20,7 @@ function FormSearch ({ onChangeText, handlerSubmit, onChangePrice, name, priceMi
         <div className="navbar-item width100 is-expanded">
           <div className="field search width100">
           <div className="select is-primary">
-            <select name='type' value={type} defaultValue='Select Type' onChange={onChangeText}>
+            <select name='type' value={type}  onChange={onChangeText}>
               <option value='all'>all</option>
               <option value='buy'>buy</option>
               <option value='sell'>sell</option>
@@ -49,7 +51,7 @@ function FormSearch ({ onChangeText, handlerSubmit, onChangePrice, name, priceMi
         <div className="navbar-item width100 is-expanded">
           <div className="field search width100">
             <div className="control">
-            <SelectTag value={tag} onChange={onChangeText}/>
+            <SelectTag tag={tag} onChange={onChangeText}/>
     
             </div>
             
@@ -116,10 +118,10 @@ export default class Navbar extends React.Component {
               <a className="navbar-item " to='/'><span role="img" aria-label="Home" className="bd-emoji">🏠</span> &nbsp;Home</a>
             </div>
             
-              <FormSearch onChangeText={this.props.onChangeText} onChangePrice={this.props.onChangePrice}
+              {/* <FormSearch onChangeText={this.props.onChangeText} onChangePrice={this.props.onChangePrice}
                 handlerSubmit={this.props.handlerSubmit} {...this.props.filter}
-              />
-             
+              /> */}
+              <FormSearch  {...this.props}/>
             
           </div>
         </nav>

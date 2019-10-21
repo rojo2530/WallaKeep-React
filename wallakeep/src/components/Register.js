@@ -1,5 +1,7 @@
 import React from 'react';
 import SelectTag from './SelectTag';
+import UserContext from '../contexts/user';
+
 
 export default class Register extends React.Component {
   constructor(props) {
@@ -8,7 +10,7 @@ export default class Register extends React.Component {
       user: {
         name: '',
         lastname: '',
-        tag: '',
+        tag: 'all',
       }
     };
     this.onChangeField = this.onChangeField.bind(this);
@@ -26,10 +28,8 @@ export default class Register extends React.Component {
   }
 
   isInvalidValidForm() {
-    console.log('Entra');
     return this.state.user.name.trim().length <= 3 ||
-      this.state.user.lastname.trim().length <= 3 || 
-      this.state.user.tag.trim().length < 1; 
+      this.state.user.lastname.trim().length <= 3 
   }
 
   onSubmit(event) {
@@ -37,7 +37,7 @@ export default class Register extends React.Component {
     if (this.isInvalidValidForm()) {
       return false;
     }
-
+    this.context.updateUser(this.state.user);
     this.props.history.push('/');
 
     // saveUser(this.state.user);
@@ -47,7 +47,7 @@ export default class Register extends React.Component {
   render () {
     return (
       <section className="hero is-fullheight">
-  <div className="hero-body">{console.log(this.state)}
+  <div className="hero-body">
     <div className="container">
       <div className="column is-4 is-offset-4 box">
         <h1 className="avatar has-text-centered section"><i className="fas fa-address-book fa-5x"></i></h1>
@@ -93,5 +93,6 @@ export default class Register extends React.Component {
 </section>
       )
   }
-
 }
+
+Register.contextType = UserContext;
