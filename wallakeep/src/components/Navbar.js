@@ -1,25 +1,61 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import SelectTag from './SelectTag';
 
-function FormSearch ({ onChangeText, remaningQueries, text }) {
+
+function FormSearch ({ onChangeText, handlerSubmit, onChangePrice, name, priceMin, priceMax, tag, type }) {
   return (
-    <form id="form-search" action=".">
+    <form id="form-search" action="." onSubmit={handlerSubmit}>
       <div className="navbar-start width100">
         <div className="navbar-item width100 is-expanded">
           <div className="field search width100">
             <div className="control">
-            <input className="input is-primary" value={text} onChange={onChangeText} id="search" type="search" placeholder="Search an Advert.." />
+            <input className="input is-primary" value={name} name='name' onChange={onChangeText} id="search" type="search" placeholder="Search Advert.." />
+            </div>
+          </div>
+        </div>
+        <div className="navbar-item width100 is-expanded">
+          <div className="field search width100">
+          <div className="select is-primary">
+            <select name='type' value={type} defaultValue='Select Type' onChange={onChangeText}>
+              <option value='all'>all</option>
+              <option value='buy'>buy</option>
+              <option value='sell'>sell</option>
+            </select>
+    </div>
+            </div>
+        </div>
+
+        <div className="navbar-item width100 is-expanded">
+          <div className="field search width100">
+            <div className="control">
+            <input className="input is-primary" value={priceMin} name='priceMin' onChange={onChangeText} id="search" type="number" placeholder="Price min.." />
+
+            
             </div>
           </div>
         </div>
         <div className="navbar-item width100 is-expanded">
           <div className="field search width100">
             <div className="control">
-            <input className="input is-primary" value={text} onChange={onChangeText} id="search" type="number" placeholder="Price" />
+            <input className="input is-primary" value={priceMax} name='priceMax' onChange={onChangeText} id="search" type="number" placeholder="Price max.." />
+
+            
             </div>
           </div>
         </div>
+        
+        <div className="navbar-item width100 is-expanded">
+          <div className="field search width100">
+            <div className="control">
+            <SelectTag value={tag} onChange={onChangeText}/>
+    
+            </div>
+            
+          </div>
+        </div>
+
         <div className="navbar-item">
           <div className="field is-grouped">
             <p className="control">
@@ -57,11 +93,13 @@ export default class Navbar extends React.Component {
     })
   }
 
+  
+
   render() {
     const { activeBurguer } = this.state;
     const { showSearch } = this.props;
     return (
-      <React.Fragment>
+      <React.Fragment>{console.log(this.props)}
       <nav className="navbar">
           <div className="navbar-brand">
             <a className="navbar-item " href="/">
@@ -78,7 +116,9 @@ export default class Navbar extends React.Component {
               <a className="navbar-item " to='/'><span role="img" aria-label="Home" className="bd-emoji">🏠</span> &nbsp;Home</a>
             </div>
             
-              <FormSearch text={this.props.text} onChangeText={this.props.onChangeText} remaningQueries={this.props.remaningQueries} imageBaseURL={this.props.imageBaseURL} text={this.props.text}/>
+              <FormSearch onChangeText={this.props.onChangeText} onChangePrice={this.props.onChangePrice}
+                handlerSubmit={this.props.handlerSubmit} {...this.props.filter}
+              />
              
             
           </div>

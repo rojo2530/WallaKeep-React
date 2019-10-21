@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Loading from './Loading';
+import Searchbar from './Searchbar';
 import api from '../utils/api';
 
 const { getAdverts } = api();
@@ -32,11 +33,7 @@ function AdvertsGrid({ adverts }) {
              </div>
              <div className="card-content">
                <div className="media">
-                 <div className="media-left">
-                   <figure className="image is-48x48">
-                     <img src='https://bulma.io/images/placeholders/96x96.png' alt="Placeholder" />
-                   </figure>
-                 </div>
+                 
              <div className="media-content">
                <p className="title is-4">{advert.name}</p>
              </div>
@@ -45,7 +42,8 @@ function AdvertsGrid({ adverts }) {
              {advert.description.substring(0,150)}
              <br />
              <br />
-             <time>{`Release Date: `}</time>
+             <time>{`Tags: ${advert.tags} `}</time>
+             <p>Precio: <b>{advert.price}</b></p>
            </div>
          </div>
        </div>
@@ -64,39 +62,64 @@ export default class Adverts extends React.Component {
     this.state = {
       loading: true,
       adverts: [],
-      textSearch: '',
+      filter: {
+        name: '',
+        type: '',
+        tag: '',
+        priceMin: '',
+        priceMax: '',
+      },
       error: false,
       currentPage: 1,
       totalPages: 50
     }
     this.changeText = this.changeText.bind(this);
-   
+    this.handlerSubmit = this.handlerSubmit.bind(this);
+    this.changePrice = this.changePrice.bind(this);
+  }
+
+  handlerSubmit(event) {
+    event.preventDefault();
+    const { name } = this.state.filter;
+    this.setState({
+      loading: true,
+    })
+    this.fetchAdverts(name);
+
+
+  }
+
+  changePrice(value) {
+    this.setState({
+      filter: {
+        ...this.state.filter,
+        minPrice: value 
+      }
+    });
   }
 
   changeText({ target }) {
     // const { getFilms } = api(this.context.user.apikey);
-    
-    if (target.value.trim().length > 0 ) {
+      // console.log(target.name);
+      
+      
       this.setState({
-        textSearch: target.value,
-      });
-    }
-    //Cuando nos metemos en el buscador y tecleamos nos vamos al home
-    // this.goPage();
-  
-    // if (event.target.value.trim().length > 0 ) {
-    //   return this.fetchFilms(event.target.value, this.context.user.birthDate, this.state.currentPage)
-    // } 
+        filter: {
+          ...this.state.filter,
+          [target.name]: target.value,
+        }
+  });
     
-    // this.discoverFilms(this.context.user);
+ 
   }
 
   componentDidMount() {
-    this.fetchAdverts()
+    this.fetchAdverts();
+    
   }
 
   fetchAdverts() {
-    getAdverts()
+    getAdverts(this.state.filter)
       .then(res => this.setState({
         loading: false,
         adverts: res.results
@@ -104,16 +127,15 @@ export default class Adverts extends React.Component {
       .catch(err => console.error('Error in fetching Adverts: ', err));
   }
 
-
-
-
-  
   render () {
-    const { loading , adverts } = this.state;
+    const { loading , adverts, filter } = this.state;
 
     return (
       <React.Fragment>
-        <Navbar onChangeText={this.changeText} />
+        {console.log('Estado : ', this.state)}
+        <Navbar onChangeText={this.changeText} handlerSubmit={this.handlerSubmit} 
+        onChangePrice={this.changePrice} {...filter}/>
+
         {loading === true 
           ?  <Loading text='Fetching Adverts' />
           :  <AdvertsGrid adverts={adverts} text={this.state.text}/>

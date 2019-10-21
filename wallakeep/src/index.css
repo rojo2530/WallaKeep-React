@@ -1,5 +1,6 @@
 
 @import "./css/detail.css";
+@import "./css/checkbox.css";
 
 @font-face {
   font-family: "Nordic";
@@ -60,6 +61,8 @@ a.navbar-item:visited {
   margin: 0.5rem;
 }
 
+
+
 .footer {
   background: #1fc8db;
   margin-top: 2.5rem;
@@ -92,3 +95,16 @@ a.navbar-item:visited {
     pointer-events: none;
     cursor: default;
 }
+
+.column {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+.row-one {
+	padding-top: 13px;
+}
+form .field {
+	margin: auto;
+	max-width: 740px;
+}
+

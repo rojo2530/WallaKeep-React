@@ -1,11 +1,21 @@
 import React from 'react';
-import './App.css';
-import 'bulma/css/bulma.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Adverts from './components/Adverts';
+import Register from './components/Register';
+
+
 
 function App() {
   return (
-    <Adverts />
+    <Router>
+      <Switch>
+        <Route exact path='/' component={Adverts} />
+        <Route exact path='/register' component={Register} />
+        <Route component={Adverts}/>
+      </Switch>
+      
+    </Router>    
+    
   );
 }
 
