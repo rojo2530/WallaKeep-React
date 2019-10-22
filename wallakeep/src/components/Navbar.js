@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SelectTag from './SelectTag';
+import { Link } from 'react-router-dom';
 
 
 function FormSearch ({ onChangeText, handlerSubmit, name, priceMin, priceMax, tag, type }) {
@@ -101,8 +101,8 @@ export default class Navbar extends React.Component {
     const { activeBurguer } = this.state;
     const { showSearch } = this.props;
     return (
-      <React.Fragment>{console.log(this.props)}
-      <nav className="navbar">
+      <React.Fragment>
+      <nav className="navbar is-fixed-top">
           <div className="navbar-brand">
             <a className="navbar-item " href="/">
               <span role="img" aria-label="Movies" className="bd-emoji">🛒</span> &nbsp;<span className="title-logo">WallaKeep</span>
@@ -115,12 +115,11 @@ export default class Navbar extends React.Component {
           </div>
           <div id="navMenubd-example" className={`navbar-menu ${activeBurguer === true ? 'is-active' : null}`}>
             <div className="navbar-start">
-              <a className="navbar-item " to='/'><span role="img" aria-label="Home" className="bd-emoji">🏠</span> &nbsp;Home</a>
+              <Link className="navbar-item " to='/'><span role="img" aria-label="Home" className="bd-emoji">🏠</span> &nbsp;Home</Link>
+              <Link className="navbar-item " to='/advert/create'><span role="img" aria-label="Profile" className="bd-emoji">📦</span> &nbsp;Create Advert</Link>
             </div>
             
-              {/* <FormSearch onChangeText={this.props.onChangeText} onChangePrice={this.props.onChangePrice}
-                handlerSubmit={this.props.handlerSubmit} {...this.props.filter}
-              /> */}
+              
               <FormSearch  {...this.props}/>
             
           </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import SelectTag from './SelectTag';
 import UserContext from '../contexts/user';
-
+import { saveUser } from '../utils/storage';
 
 export default class Register extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ export default class Register extends React.Component {
     this.context.updateUser(this.state.user);
     this.props.history.push('/');
 
-    // saveUser(this.state.user);
+    saveUser(this.state.user);
     return true;
   }
 

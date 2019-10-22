@@ -2,53 +2,77 @@ import React from 'react';
 
 export default function Searchbar (props) {
   return (
-    <form id="register-form">
-    <div class="field">
-      <label class="label" for="username">Username</label>
-      <div class="control has-icons-left">
-        <input class="input" type="text" placeholder="Username" name="username"/><span class="icon is-left"><i class="fa">user</i></span>
-      </div>
-      <label class="label" for="email">Email</label>
-      <div class="control has-icons-left">
-        <input class="input" type="email" placeholder="Email" name="email"/><span class="icon is-left"><i class="fa">envelope-square</i></span>
-      </div>
-      <div class="columns row-one">
-        <div class="column">
-          <label class="label" for="firstName">First Name</label>
-          <div class="control">
-            <input class="input" type="text" placeholder="First Name" name="firstName"/>
-          </div>
+    <>
+    <section class="hero is-dark">
+    <div class="hero-body">
+        <div class="container">
+            <div class="column is-two-thirds-tablet is-paddingless">
+                <h1 class="title">Get the merch</h1>
+                    <h2 class="subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis ipsum eget dui bibendum condimentum et eget velit.</p></h2>
+            </div>
         </div>
-        <div class="column">
-          <label class="label" for="lastName">Last Name</label>
-          <div class="control">
-            <input class="input" type="text" placeholder="Last Name" name="lastName"/>
-          </div>
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column">
-          <label class="label" for="password">Password</label>
-          <div class="control has-icons-left">
-            <input class="input" type="password" placeholder="Password" name="password"/><span class="icon is-left"><i class="fa">key</i></span>
-          </div>
-        </div>
-        <div class="column">
-          <label class="label" for="retypePassword">Re-Type Password</label>
-          <div class="control has-icons-left">
-            <input class="input" type="password" placeholder="Confirm Password" name="retypePassword"/><span class="icon is-left"><i class="fa">lock</i></span>
-          </div>
-        </div>
-      </div>
-      <div class="field is-grouped">
-        <div class="control">
-          <button class="button is-medium">Login</button>
-        </div>
-        <div class="control">
-          <button class="button is-primary is-medium" type="submit">Register</button>
-        </div>
-      </div>
     </div>
-  </form>
+    </section>
+
+    <div className="container" style={{maxWidth: '1140px'}}>
+        <div id="flow">
+            <span className="flow-1"></span>
+            <span className="flow-2"></span>
+            <span className="flow-3"></span>
+        </div>
+        <div className="section">
+            <div className="box">
+                <div className="field has-addons">
+                  <div className="control is-expanded">
+                    <input className="input has-text-centered" type="search" placeholder="Search Advert..." />
+                  </div>
+                 
+                </div>
+                <div className="field has-addons">
+                    <div className="control is-expanded mr20">
+                     <label className="label">Type</label>
+                      <div className="select is-dark width100">
+                        <select name='type' className="width100" >
+                          <option value='all'>all</option>
+                          <option value='buy'>buy</option>
+                          <option value='sell'>sell</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="control is-expanded ml20">
+                     <label className="label">Tag</label>
+                      <div className="select is-dark width100">
+                        <select name='type' className="width100">
+                          <option value='all'>all</option>
+                          <option value='buy'>buy</option>
+                          <option value='sell'>sell</option>
+                        </select>
+                      </div>
+                    </div>
+                </div>
+                <div className="field has-addons ">
+                  <div className="control is-expanded">
+                    <label className="label">Minimal Price</label>
+                    <input className="input is-dark has-text-centered" type="input" placeholder="Min Price..." />
+                  </div>
+                  <div className="control is-expanded ">
+                    <label className="label">Maximal Price</label>
+                    <input className="input is-dark has-text-centered is-fullwidth" type="input" placeholder="Max Price..." />
+                  </div>
+                 
+                </div>
+                <div className="field has-addons ">
+                  <div className="control is-expanded">
+                    <button className="button is-dark is-fullwidth">Search</button>
+                  </div>
+                </div>
+
+
+                
+
+              </div>
+    </div>
+    </div>
+    </>
   )
 }

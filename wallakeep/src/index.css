@@ -1,7 +1,4 @@
 
-@import "./css/detail.css";
-@import "./css/checkbox.css";
-
 @font-face {
   font-family: "Nordic";
   src: local("../fonts/Nordic.ttf");
@@ -10,10 +7,30 @@
 .title-logo {
   font-family: 'Nordic', cursive;
   font-size: 1.5rem;
-  
 }
 
-input[type="date"]:before {
+.grid-cards-container {
+  max-width: 1140px;
+  margin: 0 auto;
+} 
+
+.width100 {
+  width:100%;
+}  
+
+.field.has-addons .control:not(:last-child) {
+  margin-right: 10px;
+}
+
+.mr20 {
+  margin-right: 10px;
+}
+
+.ml20 {
+  margin-left: 10px;
+}
+
+/* input[type="date"]:before {
     content: attr(placeholder) !important;
     color: #aaa;
     margin-right: 0.5em;
@@ -34,7 +51,7 @@ a.navbar-item:visited {
 
 .width100 {
   width:100%;
-} 
+}  */
 
 /* .navbar-item.search {
   width:100%;
@@ -44,7 +61,7 @@ a.navbar-item:visited {
   width:100%;
 } */
 
-.navbar-item, .navbar-item:link {
+/* .navbar-item, .navbar-item:link {
   text-decoration: none;
 }
 
@@ -106,5 +123,5 @@ a.navbar-item:visited {
 form .field {
 	margin: auto;
 	max-width: 740px;
-}
+} */
 

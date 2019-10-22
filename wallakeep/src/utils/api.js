@@ -1,5 +1,7 @@
 import axios from 'axios';
-const API_URL = 'http://192.168.1.38:3001/apiv1';
+const qs = require('querystring');
+
+const API_URL = 'http://localhost:3001/apiv1';
 const LIMIT = 8;
 const SKIP = '';
 
@@ -60,20 +62,37 @@ const api = () => {
 				.catch(err => {
 					throw err;
 				});
+		},
+		createAdvert: (advert) => {
+			const endPoint = `${API_URL}/anuncios`;
+			return axios({
+				method: 'post',
+				url: endPoint,
+				data: advert
+			}).then(res => res.data)
+		},
+		getAdvertDetail: id => {
+			const endPoint = `${API_URL}/anuncios/${id}`;
+			return axios.get(endPoint)
+				.then(response => response.data.result)
+				// .catch (({ response: { data } }) => {
+				// 	console.log('Error en ruta: ', data.success, data.error.status);
+				// });
+				.catch(err => {
+					throw err;
+				})
+		}, 
+		updateAdvert: (id, advert) => {
+			const endPoint = `${API_URL}/anuncios/${id}`;
+			return axios({
+				method: 'put',
+				url: endPoint,
+				data: advert
+			}).then(res => res)
+				.catch(err => {
+					console.log('Error: ', err.response);
+				})
 		}
-	
-		// getFilms: (query, year, page = 1) => {
-    //   const endPointBase = `${API_URL}/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`;
-    //   if (year) {
-    //     const endPoint = `${endPointBase}&primary_release_year=${year}&page=${page}`;
-    //   } else {
-    //     const endPoint = `${endPointBase};`;
-    //   }
-		// 	return axios.get(endPoint)
-		// 		.then(response => response);
-		// },
-	
-		
 	};
 };
 

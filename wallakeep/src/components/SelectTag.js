@@ -28,7 +28,6 @@ export default class SelectTag extends React.Component {
     const { tag , onChange } = this.props;
     return (
       <div className="select is-primary"  style={{ width: '100%'}} >
-        {console.log('Select tag: ', this.props)}
         <select name='tag' style={{ width: '100%'}} value={tag} onChange={onChange}  >
           {tags.map(tagName => {
             return  <option key={tagName} value={tagName}>{tagName}</option>
