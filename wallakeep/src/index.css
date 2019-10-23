@@ -30,6 +30,40 @@
   margin-left: 10px;
 }
 
+.box-search {
+  background-color: #EDF2F7;
+}
+
+.vc {
+  background: #39b6ba;
+  color: #fff;
+  width: 58px;
+  text-align: center;
+  padding: 6.5px 18px;
+  position: relative;
+}
+.vc:after {
+  width: 0;
+  height: 0;
+  border: 12.5px solid transparent;
+  position: absolute;
+  content: "";
+  border-top-color: #39b6ba;
+  right: -23px;
+  top: 0px;
+  border-left-color: #39b6ba;
+}
+.vc:before {
+    width: 0;
+    height: 0;
+    border: 13px solid transparent;
+    position: absolute;
+    content: "";
+    border-bottom-color: #39b6ba;
+    right: -23px;
+    top: -1px;
+}
+
 /* input[type="date"]:before {
     content: attr(placeholder) !important;
     color: #aaa;

@@ -29,33 +29,36 @@ function AdvertsGrid({ adverts }) {
        ? <NoResults message='No results found!!' />
        : <div className="columns is-multiline cards-group grid-cards-container">
        {adverts.map(advert => (
-         <div class="column is-6-tablet is-3-desktop">
-            <div class="card has-equal-height">
-						 <div class="image has-spacing image is-3by2">
+         <div key={advert._id} className="column is-6-tablet is-3-desktop">
+            <div className="card has-equal-height">
+						 <div className="image has-spacing image is-3by2">
 							 <img src={advert.photo ? `http://localhost:3001${advert.photo}` : 'https://bulma.io/images/placeholders/1280x960.png'} alt="Placeholder" />
 						 </div>
-						 <div class="card-content has-equal-height">
-								 <div class="content">
-												 <h4 class="title has-small-spacing-bottom">{advert.name}</h4>
-														 <div class="has-spacing-bottom">
+						 <div className="card-content has-equal-height">
+								 <div className="content">
+												 <h4 className="title has-small-spacing-bottom">{advert.name}</h4>
+														 <div className="has-spacing-bottom">
 												 {advert.tags.map(tag => (
-													 	<span class="tag has-small-spacing-top is-medium">{tag}</span>
+													 	<span key={tag} className="tag has-small-spacing-top is-medium">{tag}</span>
 												 ))}	
 												 
 												 
 								 </div>
 																		 
-										 <p class="buttons">
-												 <a class="button is-link has-icons-left" href="/products/tattoo/">
-														 <span class="icon">
-																 <i class="fas fa-shopping-cart"></i>
+										 <p className="buttons">
+												 <a className="button is-link has-icons-left" href="/products/tattoo/">
+														 <span className="icon">
+																 <i className="fas fa-shopping-cart"></i>
 														 </span>
 														 <span>{advert.price}€</span>
+                             
 												 </a>
 										 </p>
+                     <h6 class="vc">{advert.type}</h6>
+
 								 </div>
 						 </div>
-						 <footer class="card-footer">
+						 <footer className="card-footer">
 							<Link to={`/advert/detail/${advert._id}`} className="card-footer-item">Detail</Link>
 							<Link to={`/advert/edit/${advert._id}`} className="card-footer-item">Edit</Link>
 						 </footer>
@@ -165,10 +168,13 @@ export default class Adverts extends React.Component {
     return (
       <React.Fragment>
         {console.log('Estado : ', this.state)}
-        <Navbar onChangeText={this.changeText} handlerSubmit={this.handlerSubmit} 
-        onChangePrice={this.changePrice} {...filter}/>
-        <Searchbar />
-
+        <Navbar  />
+        <Searchbar 
+          {...filter} 
+          onChangeText={this.changeText}
+          handlerSubmit={this.handlerSubmit} 
+          onChangePrice={this.changePrice}
+        /> 
         {loading === true 
           ?  <Loading text='Fetching Adverts' />
           :  <AdvertsGrid adverts={adverts} text={this.state.text}/>
