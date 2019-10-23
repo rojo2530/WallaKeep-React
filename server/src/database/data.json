@@ -106,6 +106,77 @@
             "lifestyle",
             "motor"
          ]
-      }
+      },
+      {      
+         "nombre": "Bicicleta",      
+         "venta": true,      
+         "precio": 230,      
+         "foto": "/images/anuncios/bici.jpg",      
+         "tags": [ "lifestyle", "motor"]    
+     },    
+     {      
+         "nombre": "iPhone 7",      
+         "venta": false,      
+         "precio": 350,      
+         "foto": "/images/anuncios/iphone7.jpg",      
+         "tags": [ "lifestyle", "mobile"]    
+     },
+     {
+         "nombre": "iPhone XR",      
+         "venta": true,      
+         "precio": 350,      
+         "foto": "/images/anuncios/iphonexr.jpg",      
+         "tags": [ "lifestyle", "mobile"]    
+     },  
+     {
+         "nombre": "Patinete",      
+         "venta": false,      
+         "precio": 50,      
+         "foto": "/images/anuncios/patinete.jpg",      
+         "tags": [ "lifestyle", "motor"]    
+
+     },
+     {
+         "nombre": "Silla Aeron",      
+         "venta": true,      
+         "precio": 1300,      
+         "foto": "/images/anuncios/aeron.jpg",      
+         "tags": [ "work"]    
+     },
+     {
+         "nombre": "Infiniti Q60",      
+         "venta": true,      
+         "precio": 50800,      
+         "foto": "/images/anuncios/infinitiq60.jpg",      
+         "tags": [ "motor"]    
+     },
+     {
+         "nombre": "Honda CBR600",      
+         "venta": true,      
+         "precio": 8000,      
+         "foto": "/images/anuncios/hondacbr.jpg",      
+         "tags": [ "motor"]    
+     },
+     {
+         "nombre": "Macbook Pro 13",      
+         "venta": false,      
+         "precio": 1200,      
+         "foto": "/images/anuncios/macbook.jpg",      
+         "tags": [ "work", "mobile"]    
+     },
+     {
+         "nombre": "Gafas de Sol",      
+         "venta": true,      
+         "precio": 100,      
+         "foto": "/images/anuncios/gafas.jpg",      
+         "tags": [ "lifestyle"]    
+     },
+     {
+         "nombre": "zapatillas deporte",      
+         "venta": true,      
+         "precio": 70,      
+         "foto": "/images/anuncios/zapatillas.jpg",      
+         "tags": [ "lifestyle"]    
+     }
    ]
  }
