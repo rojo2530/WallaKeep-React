@@ -2,7 +2,7 @@ import axios from 'axios';
 const qs = require('querystring');
 
 const API_URL = 'http://localhost:3001/apiv1';
-const LIMIT = 8;
+const LIMIT = 5;
 const SKIP = '';
 
 function buildEndPoint(filter) {
@@ -46,9 +46,15 @@ function getQueryPrice(priceMin, priceMax) {
 
 const api = () => {
 	return {
-		getAdverts: (filter) => {
+		getAdverts: (filter, page = 1) => {
 			//No me deja el eslint y lo tengo que poner con let
-			const endPoint = buildEndPoint(filter);
+			console.log('Pagina: ', page);
+			const skip = (page - 1) * LIMIT;
+			console.log('Skip', skip);
+			let endPoint = buildEndPoint(filter);
+			if (skip !== 0) {
+				endPoint = `${endPoint}&skip=${skip}`;
+			}
       return axios.get(endPoint)
 				.then(response => response.data)
 				.catch(err => {

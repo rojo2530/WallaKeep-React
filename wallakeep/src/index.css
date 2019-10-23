@@ -64,6 +64,11 @@
     top: -1px;
 }
 
+.container-pagination {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
 /* input[type="date"]:before {
     content: attr(placeholder) !important;
     color: #aaa;

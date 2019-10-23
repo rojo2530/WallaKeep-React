@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 import Loading from './Loading';
 import Searchbar from './Searchbar';
 import api from '../utils/api';
+import Pagination from 'bulma-pagination-react';
 
 const { getAdverts } = api();
 
@@ -22,7 +23,7 @@ function NoResults ({ message, error }) {
 	)
 }
 
-function AdvertsGrid({ adverts }) {
+function AdvertsGrid({ adverts, onChangePage, currentPage, totalPages }) {
   return (
    <React.Fragment>
      {adverts.length === 0
@@ -54,7 +55,7 @@ function AdvertsGrid({ adverts }) {
                              
 												 </a>
 										 </p>
-                     <h6 class="vc">{advert.type}</h6>
+                     <h6 className="vc">{advert.type}</h6>
 
 								 </div>
 						 </div>
@@ -68,7 +69,11 @@ function AdvertsGrid({ adverts }) {
 								 </div>
      ))}
      
-   </div>}
+     
+   </div>
+  
+  }
+  
   
  </React.Fragment>
  )
@@ -94,6 +99,7 @@ export default class Adverts extends React.Component {
     this.changeText = this.changeText.bind(this);
     this.handlerSubmit = this.handlerSubmit.bind(this);
     this.changePrice = this.changePrice.bind(this);
+    this.handlerPage = this.handlerPage.bind(this);
   }
 
   handlerSubmit(event) {
@@ -101,9 +107,18 @@ export default class Adverts extends React.Component {
     const { name } = this.state.filter;
     this.setState({
       loading: true,
+      currentPage: 1,
     })
     this.fetchAdverts(name);
 
+
+  }
+
+  handlerPage(currentPage) {
+    this.setState({
+      currentPage,
+      loading: true,
+    })
 
   }
 
@@ -148,8 +163,15 @@ export default class Adverts extends React.Component {
     );
   }
 
-  fetchAdverts() {
-    getAdverts(this.state.filter)
+  componentDidUpdate (prevProps, prevState)  {
+    if (prevState.currentPage != this.state.currentPage) {
+      this.fetchAdverts(this.state.filter, this.state.currentPage)
+   }
+   
+  }
+
+  fetchAdverts(filter, page) {
+    getAdverts(filter, page)
       .then(res => this.setState({
         loading: false,
         adverts: res.results
@@ -158,7 +180,7 @@ export default class Adverts extends React.Component {
   }
 
   render () {
-    const { loading , adverts, filter } = this.state;
+    const { loading , adverts, filter, totalPages, currentPage } = this.state;
     const { user } = this.context;
 
     if (Object.entries(user).length === 0) {
@@ -166,7 +188,7 @@ export default class Adverts extends React.Component {
     }
 
     return (
-      <React.Fragment>
+      <>
         {console.log('Estado : ', this.state)}
         <Navbar  />
         <Searchbar 
@@ -177,9 +199,22 @@ export default class Adverts extends React.Component {
         /> 
         {loading === true 
           ?  <Loading text='Fetching Adverts' />
-          :  <AdvertsGrid adverts={adverts} text={this.state.text}/>
+          :  <>
+             <AdvertsGrid adverts={adverts} text={this.state.text} 
+              totalPages={totalPages} currentPage={currentPage} 
+              onChangePage={this.handlerPage}/>
+              <div className="container-pagination">
+                <Pagination
+                          pages={totalPages}
+                          currentPage={currentPage}
+                          onChange={(page) =>{this.handlerPage(page)}} />
+              </div>
+              </>
+             
+            
         }
-      </React.Fragment>
+        
+      </>
     )
   } 
 }
