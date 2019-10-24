@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import UserContext from '../contexts/user';
+import { deleteStorage } from '../utils/storage';
 
-export default class Navbar extends React.Component {
+class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,16 +19,21 @@ export default class Navbar extends React.Component {
     })
   }
 
-  logout() {
-
+  componentDidMount() {
+    console.log('Props2: ', this.props);
   }
 
-
+  logout(event) {
+    event.preventDefault();
+    deleteStorage();
+    this.context.updateUser({});
+    this.props.history.push('/register');
+  }
 
   render() {
     const { activeBurguer } = this.state;
     return (
-      <React.Fragment>
+      <React.Fragment>  {console.log('Props: ', this.props)}
       <nav className="navbar is-fixed-top">
           <div className="navbar-brand">
             <a className="navbar-item " href="/">
@@ -44,15 +50,16 @@ export default class Navbar extends React.Component {
               <Link className="navbar-item " to='/'><span role="img" aria-label="Home" className="bd-emoji">🏠</span> &nbsp;Home</Link>
               <Link className="navbar-item " to='/advert/create'><span role="img" aria-label="Profile" className="bd-emoji">📦</span> &nbsp;Create Advert</Link>
             </div>
-          </div>
-          <div class="navbar-item">
-                    <div class="buttons">
-                            <button onSubmit={this.logout} className="is-dark has-text-weight-bold is-normal button" href="/">
+            <div className="navbar-item">
+                    <div className="buttons">
+                            <button onClick={this.logout} className="is-dark has-text-weight-bold is-normal button">
                                LogOut
                             </button>
-                            
                     </div>
                 </div>
+                
+          </div>
+          
         </nav>
       </React.Fragment>
     )
@@ -60,3 +67,5 @@ export default class Navbar extends React.Component {
 }
 
 Navbar.contextType = UserContext;
+
+export default withRouter(Navbar);

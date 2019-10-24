@@ -206,7 +206,6 @@ export default class Adverts extends React.Component {
               onChangePage={this.handlerPage}/>
               <div className="container-pagination">
                 <Pagination
-                          
                           currentPage={currentPage}
                           onChange={(page) =>{this.handlerPage(page)}} />
               </div>

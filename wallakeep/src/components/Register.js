@@ -56,14 +56,14 @@ export default class Register extends React.Component {
             <div className="field">
               <label className="label">Name</label>
               <div className="control has-icons-left">
-                <input name="name" className="input" value={this.state.user.name} onChange={this.onChangeField} type="text" placeholder="e.g Alex Smith" /><span className="icon is-small is-left"><i className="fas fa-user"></i></span>
+                <input name="name" className="input is-dark" value={this.state.user.name} onChange={this.onChangeField} type="text" placeholder="e.g Alex Smith" /><span className="icon is-small is-left"><i className="fas fa-user"></i></span>
               </div>
               <p className="help">The name is invalid, is too short</p>
             </div>
             <div className="field">
               <label className="label">Last name</label>
               <div className="control has-icons-left">
-                <input name="lastname" className="input" type="text" value={this.state.user.surname} onChange={this.onChangeField}  placeholder="e.g. alex.smith" /><span className="icon is-small is-left"><i className="fas fa-user"></i></span>
+                <input name="lastname" className="input is-dark" type="text" value={this.state.user.surname} onChange={this.onChangeField}  placeholder="e.g. alex.smith" /><span className="icon is-small is-left"><i className="fas fa-user"></i></span>
               </div>
               <p className="help">The last name is invalid, is too short</p>
 
@@ -78,7 +78,7 @@ export default class Register extends React.Component {
            
             <div className="field">
               <p className="control">
-                <button className="button is-primary is-medium is-fullwidth is-disabled"  disabled={this.isInvalidValidForm()}>Sign Up</button>
+                <button className="button is-dark is-medium is-fullwidth is-disabled"  disabled={this.isInvalidValidForm()}>Sign Up</button>
               </p>
             </div>
           </form>
