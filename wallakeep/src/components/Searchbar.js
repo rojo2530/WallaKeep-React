@@ -5,18 +5,9 @@ import SelectTag from './SelectTag';
 export default function Searchbar ({ onChangeText, handlerSubmit, name, priceMin, priceMax, tag, type }) {
   return (
     <>
-    <section className="hero is-dark">
-    <div className="hero-body">
-        <div className="container">
-            <div className="column is-two-thirds-tablet is-paddingless">
-                <h1 className="title">Get the merch</h1>
-                    <h2 className="subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis ipsum eget dui bibendum condimentum et eget velit.</p></h2>
-            </div>
-        </div>
-    </div>
-    </section>
+    
 
-    <div className="container" style={{maxWidth: '1140px'}}>
+    <div className="container" style={{maxWidth: '1140px', marginTop: '40px'}}>
     <form id="form-search" action="." onSubmit={handlerSubmit}>
 
         <div className="section">

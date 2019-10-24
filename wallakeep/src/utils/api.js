@@ -1,9 +1,7 @@
 import axios from 'axios';
-const qs = require('querystring');
 
 const API_URL = 'http://localhost:3001/apiv1';
 const LIMIT = 5;
-const SKIP = '';
 
 function buildEndPoint(filter) {
 	const endPointBase = `${API_URL}/anuncios?limit=${LIMIT}`;
@@ -48,13 +46,15 @@ const api = () => {
 	return {
 		getAdverts: (filter, page = 1) => {
 			//No me deja el eslint y lo tengo que poner con let
-			console.log('Pagina: ', page);
 			const skip = (page - 1) * LIMIT;
+			console.log('Hola');
 			console.log('Skip', skip);
 			let endPoint = buildEndPoint(filter);
 			if (skip !== 0) {
 				endPoint = `${endPoint}&skip=${skip}`;
 			}
+			console.log('Endpoint ', endPoint);
+
       return axios.get(endPoint)
 				.then(response => response.data)
 				.catch(err => {

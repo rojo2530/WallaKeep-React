@@ -5,6 +5,8 @@ import Adverts from './components/Adverts';
 import Register from './components/Register';
 import NewAdvert from './components/NewAdvert';
 import DetailAdvert from './components/DetailAdvert';
+import ErrorBoundary from './components/ErrorBoundary';
+import Error404 from './components/Error404';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -23,19 +25,21 @@ export default class App extends React.Component {
 	
   render () {
     return (
-			<UserProvider value={this.state}>
-				<Router>
-					<Switch>
-						<Route exact path='/' component={Adverts} />
-						<Route exact path='/register' component={Register} />
-						<Route exact path='/advert/detail/:id' component={DetailAdvert} />
-						<Route key='add-advert' exact path='/advert/create' component={NewAdvert} />
-						<Route key='edit-advert' exact path='/advert/edit/:id' component={NewAdvert} />
-						<Route component={Adverts}/>
-					</Switch>
-					
-				</Router>
-			</UserProvider>    
+			<ErrorBoundary >
+				<UserProvider value={this.state}>
+					<Router>
+						<Switch>
+							<Route exact path='/' component={Adverts} />
+							<Route exact path='/register' component={Register} />
+							<Route exact path='/advert/detail/:id' component={DetailAdvert} />
+							<Route key='add-advert' exact path='/advert/create' component={NewAdvert} />
+							<Route key='edit-advert' exact path='/advert/edit/:id' component={NewAdvert} />
+							<Route component={Error404}/>
+						</Switch>
+						
+					</Router>
+				</UserProvider>  
+			</ErrorBoundary>  
     );
   }
 }

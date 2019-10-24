@@ -8,32 +8,22 @@ import Loading from './Loading';
 import Searchbar from './Searchbar';
 import api from '../utils/api';
 import Pagination from 'bulma-pagination-react';
+import CaptureError from './CaptureError';
 
 const { getAdverts } = api();
-
-
-
-
-function NoResults ({ message, error }) {
-	return (
-		<div className="notification is-danger" id="no-results">
-			<p>{message}</p>
-			<p>{error}</p>
-		</div>
-	)
-}
 
 function AdvertsGrid({ adverts, onChangePage, currentPage, totalPages }) {
   return (
    <React.Fragment>
+     
      {adverts.length === 0
-       ? <NoResults message='No results found!!' />
+       ? <CaptureError message='No results found!!' />
        : <div className="columns is-multiline cards-group grid-cards-container">
        {adverts.map(advert => (
          <div key={advert._id} className="column is-6-tablet is-3-desktop">
             <div className="card has-equal-height">
 						 <div className="image has-spacing image is-3by2">
-							 <img src={advert.photo ? `http://localhost:3001${advert.photo}` : 'https://bulma.io/images/placeholders/1280x960.png'} alt="Placeholder" />
+							 <img src={advert.photo.startsWith('/images') ? `http://localhost:3001${advert.photo}` : `${advert.photo}`} alt="Placeholder" />
 						 </div>
 						 <div className="card-content has-equal-height">
 								 <div className="content">
@@ -93,8 +83,8 @@ export default class Adverts extends React.Component {
         priceMax: '',
       },
       error: false,
+      errorMessage: '',
       currentPage: 1,
-      totalPages: 50
     }
     this.changeText = this.changeText.bind(this);
     this.handlerSubmit = this.handlerSubmit.bind(this);
@@ -104,12 +94,11 @@ export default class Adverts extends React.Component {
 
   handlerSubmit(event) {
     event.preventDefault();
-    const { name } = this.state.filter;
     this.setState({
       loading: true,
       currentPage: 1,
     })
-    this.fetchAdverts(name);
+    this.fetchAdverts(this.state.filter);
 
 
   }
@@ -164,7 +153,7 @@ export default class Adverts extends React.Component {
   }
 
   componentDidUpdate (prevProps, prevState)  {
-    if (prevState.currentPage != this.state.currentPage) {
+    if (prevState.currentPage !== this.state.currentPage) {
       this.fetchAdverts(this.state.filter, this.state.currentPage)
    }
    
@@ -174,22 +163,34 @@ export default class Adverts extends React.Component {
     getAdverts(filter, page)
       .then(res => this.setState({
         loading: false,
-        adverts: res.results
-      }))
-      .catch(err => console.error('Error in fetching Adverts: ', err));
+        adverts: res.results,
+        
+      })).catch(err => {
+        console.log("Error caught in catch",err);
+        this.setState({
+          error: true,
+          errorMessage: err.message,
+          loading: false,
+        })
+      });
+      
   }
 
   render () {
-    const { loading , adverts, filter, totalPages, currentPage } = this.state;
+    const { loading , adverts, filter, totalPages, currentPage, error, errorMessage } = this.state;
     const { user } = this.context;
+    console.log('Mi estado: ', this.state);
 
     if (Object.entries(user).length === 0) {
       return null;
     }
 
+    if (error) {
+      return <CaptureError message="Error fecthing Adverts" error={errorMessage} />
+    }
+
     return (
       <>
-        {console.log('Estado : ', this.state)}
         <Navbar  />
         <Searchbar 
           {...filter} 
@@ -205,7 +206,7 @@ export default class Adverts extends React.Component {
               onChangePage={this.handlerPage}/>
               <div className="container-pagination">
                 <Pagination
-                          pages={totalPages}
+                          
                           currentPage={currentPage}
                           onChange={(page) =>{this.handlerPage(page)}} />
               </div>

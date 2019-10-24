@@ -52,7 +52,7 @@ export default class Register extends React.Component {
       <div className="column is-4 is-offset-4 box">
         <h1 className="avatar has-text-centered section"><i className="fas fa-address-book fa-5x"></i></h1>
         <div className="login-form">
-          <form role="form" onSubmit={this.onSubmit}>
+          <form onSubmit={this.onSubmit}>
             <div className="field">
               <label className="label">Name</label>
               <div className="control has-icons-left">

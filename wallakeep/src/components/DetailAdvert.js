@@ -4,6 +4,7 @@ import { restoreUser } from '../utils/storage';
 import Loading from './Loading';
 import api from '../utils/api';
 import Navbar from './Navbar';
+import { FaCoins } from 'react-icons/fa';
 
 const { getAdvertDetail } = api();
 
@@ -35,7 +36,7 @@ export default class DetailAdvert extends React.Component {
     })).catch (({ response: { data } }) => {
       console.log('Error en ruta: ', data.success, data.error.status);
       if (!data.success && data.error.status === 422) {
-        this.props.history.push('/rutanoencontrada');
+        this.props.history.push('/notFound');
       }
       })
   }
@@ -51,19 +52,20 @@ export default class DetailAdvert extends React.Component {
   render() {
     const { advert, loading } = this.state;
     const { user } = this.context;
+    console.log(this.state);
 
     if (Object.entries(user).length === 0) {
       return null;
     }
 
 
-    if (this.state.loading) {
-      return <Loading message='Fetching Advert Detail'/>;
+    if (loading) {
+      return <Loading text='Fetching detail Advert' />
     }
-    return (
+     return (
       <>
       <Navbar />
-      <section className="section has-spacing section-gray">
+      <section className="section has-spacing section-gray" style={{maxWidth: '1140px', margin: '0 auto'}}>
     <div className="container">
         <div className="columns">
             <div className="column">
@@ -80,14 +82,14 @@ export default class DetailAdvert extends React.Component {
 
         <div className="has-spacing-bottom">
         {advert.tags.map(tag => (
-													 	<span class="tag has-small-spacing-top is-medium">{tag}</span>
+													 	<span key={tag} className="tag has-small-spacing-top is-medium">{tag}</span>
 												 ))}	
         </div>
                            
 <p>{advert.description}</p>                            <p className="buttons">
-                                <a className="button is-link has-icons-left is-medium" href="#">
+                                <a className="button is-link has-icons-left is-medium" href="/">
                                     <span className="icon">
-                                        <i className="fas fa-shopping-cart"></i>
+                                        <i className="fas fa-truck"></i>
                                     </span>
                                     <span>Add to basket</span>
                                 </a>
@@ -96,7 +98,7 @@ export default class DetailAdvert extends React.Component {
                                     <div className="media">
                                         <div className="media-left">
                                                 <span className="icon">
-        <i className="fas fa-mail-bulk"></i>
+        <FaCoins />
     </span>
 
                                         </div>
@@ -118,19 +120,7 @@ export default class DetailAdvert extends React.Component {
                                             <p className="subtitle is-5">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae</p>
                                         </div>
                                     </div>
-                                        <hr />
-                                    <div className="media">
-                                        <div className="media-left">
-                                                <span className="icon">
-        <i className="fas fa-coins"></i>
-    </span>
-
-                                        </div>
-                                        <div className="media-content">
-                                            <p className="title is-5"> Money Back Guarantee</p>
-                                            <p className="subtitle is-5">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae</p>
-                                        </div>
-                                    </div>
+                                    
                         </div>
                     </div>
                 </div>

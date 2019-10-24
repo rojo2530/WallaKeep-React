@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown } from "react-bulma-components";
+import CaptureError from './CaptureError';
 import api from '../utils/api';
 
 const { getTags } = api();
@@ -10,6 +10,8 @@ export default class SelectTag extends React.Component {
     this.state = {
       tags: '',
       loading: true,
+      error: false, 
+      errorMessage: ''
     }
   }
 
@@ -17,11 +19,16 @@ export default class SelectTag extends React.Component {
     getTags().then(tags => this.setState({
       tags: ['all', ...tags],
       loading: false
-    })).catch(err => console.error(err));
+    })).catch(err => this.setState({ error: true, errorMessage: err.message}));
   }
 
   render () {
-    const { tags, loading } = this.state;
+    const { tags, loading, error } = this.state;
+    console.log(error);
+    if (error) {
+      return <CaptureError message="Error fecthing tags" error={error} />
+    }
+
     if (loading) {
       return null;
     }

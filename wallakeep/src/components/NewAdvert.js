@@ -5,6 +5,7 @@ import SelectMultiple from './SelectMultiple';
 import Navbar  from './Navbar';
 import { notification } from 'antd';
 import api from '../utils/api';
+import { FaAdversal } from 'react-icons/fa';
 
 const { createAdvert, getAdvertDetail, updateAdvert } = api();
 
@@ -12,9 +13,9 @@ const openNotification = (message, description) => {
   notification.open({
     message,
     description,
-    onClick: () => {
-      console.log('Notification Clicked!');
-    },
+    // onClick: () => {
+    //   console.log('Notification Clicked!');
+    // },
     type: 'success',
     style: {backgroundColor: 'green'}
   });
@@ -58,12 +59,25 @@ export default class NewAdvert extends React.Component {
       return updateAdvert(this.state.advert._id, this.state.advert)
         .then((res) => {
           console.log('Respuesta: ', res);
-          openNotification('Advert update with sucess', `The advert with id ${this.state.advert._id} was updated correctly`)
+          openNotification('Advert update with sucess', `The advert was updated correctly`)
         })
         
     }
 
-    createAdvert(this.state.advert).then(res => console.log(res));
+    createAdvert(this.state.advert).then(res => {
+      console.log('Respuesta: ', res);
+      openNotification('Advert created with success', `The advert was created correctly`);
+      this.setState({
+        advert: {
+          name: '',
+          description: '',
+          tags: [],
+          price: '',
+          type: 'sell',
+          photo: ''
+        },
+      })
+    });
     
   }
 
@@ -147,11 +161,11 @@ export default class NewAdvert extends React.Component {
       <>
 
       <Navbar />
-      <section className="hero ">{console.log(this.state.advert)}
+      <section className="hero" style={{marginTop: '50px'}}>
     <div className="hero-body">
       <div className="container">
         <div className="column is-4 is-offset-4 box">
-          <h1 className="avatar has-text-centered section"><i className="fas fa-user fa-5x"></i></h1>
+          <h1 className="avatar has-text-centered section"><FaAdversal size={52}/></h1>
           <div className="login-form">
             <form onSubmit={this.onSubmit}>
               <div className="field">

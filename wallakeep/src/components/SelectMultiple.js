@@ -1,19 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Select } from 'antd';
 import api from '../utils/api';
 
 const { Option } = Select;
 const { getTags } = api();
-
-
-const tags = ['work', 'mobile', 'work', 'lifestyle'];
-
-
-
-function handleChange(value) {
-  console.log(`selected ${value[0]}`);
-}
 
 export default class SelectMultiple extends React.Component {
   constructor(props) {
