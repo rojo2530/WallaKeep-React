@@ -110,14 +110,16 @@
       {      
          "name": "Bicicleta",      
          "type": "sell",      
-         "price": 230,      
+         "price": 230,   
+         "description": "Una pedazo de bicicleta",   
          "photo": "/images/anuncios/bici.jpg",      
          "tags": [ "lifestyle", "motor"]    
      },    
      {      
          "name": "iPhone 7",      
          "type": "buy",      
-         "price": 350,      
+         "price": 350,
+         "description": "Un bueno movil pero algo ya antiguo",      
          "photo": "/images/anuncios/iphone7.jpg",      
          "tags": [ "lifestyle", "mobile"]    
      },
@@ -125,13 +127,15 @@
          "name": "iPhone XR",      
          "type": "sell",      
          "price": 350,      
+         "description": "Movil de Apple con precio algo mas barato que el tope de gama",
          "photo": "/images/anuncios/iphonexr.jpg",      
          "tags": [ "lifestyle", "mobile"]    
      },  
      {
          "name": "Patinete",      
          "type": "sell",      
-         "price": 50,      
+         "price": 50,
+         "description": "Para ir a todos sitios sin gasar gasolina",      
          "photo": "/images/anuncios/patinete.jpg",      
          "tags": [ "lifestyle", "motor"]    
 
@@ -140,6 +144,7 @@
          "name": "Silla Aeron",      
          "type": "buy",      
          "price": 1300,      
+         "description": "La mejor silla para trabajar",
          "photo": "/images/anuncios/aeron.jpg",      
          "tags": [ "work"]    
      },
@@ -147,6 +152,7 @@
          "name": "Infiniti Q60",      
          "type": "sell",      
          "price": 50800,      
+         "description": "Un coche de altos vuelos",
          "photo": "/images/anuncios/infinitiq60.jpg",      
          "tags": [ "motor"]    
      },
@@ -154,6 +160,7 @@
          "name": "Honda CBR600",      
          "type": "buy",      
          "price": 8000,      
+         "description": "Una gran moto deportiva",
          "photo": "/images/anuncios/hondacbr.jpg",      
          "tags": [ "motor"]    
      },
@@ -161,6 +168,7 @@
          "name": "Macbook Pro 13",      
          "type": "sell",      
          "price": 1200,      
+         "description": "Portatil muy bueno para desarrollar apps de React",
          "photo": "/images/anuncios/macbook.jpg",      
          "tags": [ "work", "mobile"]    
      },
@@ -168,13 +176,15 @@
          "name": "Gafas de Sol",      
          "type": "buy",      
          "price": 100,      
-         "photo": "/images/anuncios/gafas.jpg",      
+         "photo": "/images/anuncios/gafas.jpg",
+         "description": "Para protegerte de sol cuando el lorenzo aprieta",      
          "tags": [ "lifestyle"]    
      },
      {
          "name": "zapatillas deporte",      
          "type": "buy",      
          "price": 70,      
+         "description": "Imprescindibles para ir a correr",
          "photo": "/images/anuncios/zapatillas.jpg",      
          "tags": [ "lifestyle"]    
      }
