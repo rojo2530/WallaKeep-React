@@ -45,17 +45,13 @@ function getQueryPrice(priceMin, priceMax) {
 const api = () => {
 	return {
 		getAdverts: (filter, page = 1) => {
-			//No me deja el eslint y lo tengo que poner con let
+			//No me deja el eslint y lo tengo que poner con let en vez de const
 			const skip = (page - 1) * LIMIT;
-			console.log('Hola');
-			console.log('Skip', skip);
 			let endPoint = buildEndPoint(filter);
 			if (skip !== 0) {
 				endPoint = `${endPoint}&skip=${skip}`;
 			}
-			console.log('Endpoint ', endPoint);
-
-      return axios.get(endPoint)
+			return axios.get(endPoint)
 				.then(response => response.data)
 				.catch(err => {
 					throw err;

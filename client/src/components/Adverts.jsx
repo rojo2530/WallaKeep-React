@@ -8,7 +8,9 @@ import Searchbar from './Searchbar';
 import api from '../utils/api';
 import Pagination from 'bulma-pagination-react';
 import CaptureError from './CaptureError';
+import Footer from './Footer';
 import PropTypes from 'prop-types';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const styles = {
   content: {
@@ -46,7 +48,7 @@ function AdvertsGrid({ adverts }) {
 										<p className="buttons">
                       <a className="button is-link has-icons-left" href="/products/tattoo/">
                         <span className="icon">
-                          <i className="fas fa-shopping-cart"></i>
+                          <FaShoppingCart />
                         </span>
                         <span>{advert.price}€</span>
                       </a>
@@ -109,15 +111,6 @@ export default class Adverts extends React.Component {
     })
   }
 
-  // changePrice(value) {
-  //   this.setState({
-  //     filter: {
-  //       ...this.state.filter,
-  //       minPrice: value 
-  //     }
-  //   });
-  // }
-
   changeText({ target }) {
     this.setState({
       filter: {
@@ -135,7 +128,6 @@ export default class Adverts extends React.Component {
     return user;
   }
   
-
   componentDidMount() {
     const user = this.updateFilterFromStorage() || this.context.user;
     if (Object.entries(user).length === 0) {
@@ -163,7 +155,7 @@ export default class Adverts extends React.Component {
         loading: false,
         adverts: res.results,
         
-      })).catch(err => {
+      })).catch(err => {  
         console.log("Error caught in catch",err);
         this.setState({
           error: true,
@@ -187,11 +179,7 @@ export default class Adverts extends React.Component {
     return (
       <>
         <Navbar  />
-        <Searchbar 
-          {...filter} 
-          onChangeText={this.changeText}
-          handlerSubmit={this.handlerSubmit} 
-        /> 
+        <Searchbar {...filter} onChangeText={this.changeText} handlerSubmit={this.handlerSubmit} /> 
         {loading === true 
           ?  <Loading text='Fetching Adverts' />
           :  <>
@@ -203,8 +191,9 @@ export default class Adverts extends React.Component {
                     currentPage={currentPage}
                     onChange={(page) =>{this.handlerPage(page)}} />
                 </div>
-              </>
+            </>
         }
+        <Footer />
       </>
     )
   } 
