@@ -31,6 +31,7 @@ Attach App's Capture:
 
 * Clone Repo with https://github.com/rojo2530/BeerFront.git
 * Make sure MongoDB server is running.
+* Inside folder server and client, execute `npm install`
 * Inside folder server, execute `npm run init` , this command import data into Database.
 * Inside Folder server, execute `npm start` , this commando start api server
 * Finally execute `npm start` inside client folder
